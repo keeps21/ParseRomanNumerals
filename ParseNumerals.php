@@ -30,14 +30,14 @@ function ParseRomanNumerals($input)
 			$next = $numerals[$input[$i + 1]];
 		}
 
-		if($i > 0 && $i < $count) {		// we have a prev value
+		if($i > 0 && $i <= $count) {		// we have a prev value
 			$prev = $numerals[$input[$i - 1]];
 		}
 
 		if($next > $current) {			// next numeral is greater than the current,
 			$val = $next - $current;	// we should delete current val from the next
 
-		} elseif($current > $prev && $i > 0 && $i < $count) {	// current is greater than prev, 
+		} elseif($current > $prev && $i > 0 && $i <= $count) {	// current is greater than prev, 
 			$val = 0;											// do nothing as we've already handled this above
 																// make sure $i > 0 and < count so we don't set the 
 																// value to 0 for first and last item in array
@@ -48,7 +48,7 @@ function ParseRomanNumerals($input)
 
 		// add value of this iteration to total
 		$total += $val;
-
+		
 		// reset vars to tidy up for next iteration
 		$next = 0;		
 		$current = 0;		
